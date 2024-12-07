@@ -32,3 +32,5 @@ async def change_info(person_id: int,person_name: str, person_age: int,db: Sessi
 @router.delete("/persons/{person_id}")
 async def delete_person_id(person_id: int, db: Session = Depends(get_db)):
     return await delete_person(db, person_id)
+
+    
