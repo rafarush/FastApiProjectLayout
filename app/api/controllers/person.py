@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.api.schemas.person import Person
-from app.api.crud.person import create_person, get_person, delete_person, read_all_person, update_data
+from app.api.crud.person import create_person, get_person, delete_person, read_all_person, update_data, sort_person_by_id
 from app.api.db.sessions import get_db
 
 router = APIRouter()
@@ -32,3 +32,10 @@ async def change_info(person_id: int,person_name: str, person_age: int,db: Sessi
 @router.delete("/persons/{person_id}")
 async def delete_person_id(person_id: int, db: Session = Depends(get_db)):
     return await delete_person(db, person_id)
+
+
+#Sort all people
+@router.post("/persons/sort")
+async def sort_people_by_id(db: Session = Depends(get_db)):
+    return await sort_person_by_id(db)
+    
