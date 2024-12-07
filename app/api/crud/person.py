@@ -15,6 +15,8 @@ async def create_person(db: Session, person):
 #GET
 async def get_person(db: Session, person_id: int):
     person = db.query(PersonModel).filter(PersonModel.id == person_id).first()
+    if person is None:
+        raise HTTPException(status_code=404, detail="Person not found")
     return person
 
 async def read_all_person(skip: int, limit: int, db: Session):
